@@ -23,6 +23,9 @@ def organize_files(folder_path):
         'zip': 'ZIP'
     }
 
+    organized_folder = os.path.join(folder_path, "OrganizedFiles")
+    os.makedirs(organized_folder, exist_ok=True)
+
     # Get the list of files in the folder
     files = os.listdir(folder_path)
 
@@ -34,16 +37,16 @@ def organize_files(folder_path):
             file_type = file_types.get(file_extension, 'Others')
 
             # Create the folder if it does not exist
-            if not os.path.exists(os.path.join(folder_path, file_type)):
-                os.makedirs(os.path.join(folder_path, file_type))
+            if not os.path.exists(os.path.join(organized_folder, file_type)):
+                os.makedirs(os.path.join(organized_folder, file_type))
 
             # Move the file to the appropriate folder
-            shutil.move(os.path.join(folder_path, file), os.path.join(folder_path, file_type, file))
+            shutil.move(os.path.join(folder_path, file), os.path.join(organized_folder, file_type, file))
 
     print("Files organized successfully.")
 
 # Path of the folder you want to organize
-folder_path = "/your/path/ToBeOrganized"
+folder_path = "/Users/refnando/Downloads"
 
 # Call the function to organize the files
 organize_files(folder_path)
